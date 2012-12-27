@@ -1,9 +1,10 @@
 {
-    "name": "cmsx/controller",
-    "version" : "0.1",
-    "type": "library",
-    "description": "CMSx Controller component",
-    "homepage": "http://cmsx.ru",
+    "name":"cmsx/controller",
+    "version":"0.1",
+    "type":"library",
+    "description":"CMSx Controller component",
+    "homepage":"http://cmsx.ru",
+    "license":"MIT",
     "require":{
         "php":">=5.3.0",
         "cmsx/page":"dev-master",
@@ -14,5 +15,5 @@
             "CMSx":"src"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability":"dev"
 }
