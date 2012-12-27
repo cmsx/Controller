@@ -9,7 +9,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 {
   function testRedirect()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     $p = '/some/path.html';
 
     try {
@@ -33,7 +33,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testBack()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->back();
       $this->fail('Редирект выбрасывает исключение');
@@ -46,7 +46,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testNotFound()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->notFound();
       $this->fail('Выбрасывает исключение');
@@ -58,7 +58,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testForbidden()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->forbidden();
       $this->fail('Выбрасывает исключение');
@@ -69,7 +69,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testUnauthorized()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->unauthorized();
       $this->fail('Выбрасывает исключение');
@@ -80,7 +80,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testUnavailable()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->unavailable();
       $this->fail('Выбрасывает исключение');
@@ -91,7 +91,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testServerError()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->serverError();
       $this->fail('Выбрасывает исключение');
@@ -102,17 +102,19 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testMessage()
   {
-    $c = new Controller();
+    $c = new Controller('test', 'test');
     try {
       $c->redirect('/some/path.html');
       $this->fail('Редирект выбрасывает исключение');
     } catch (\CMSx\Controller\Exception $e) {
       $m = Exception::GetHTTPInfo($e->getCode(), true);
       $s = Exception::GetHTTPInfo($e->getCode());
+      $h = 'HTTP/1.0 ' . $e->getCode() . ' '.$s;
       $this->assertNotEmpty($m, 'Текст ошибки есть');
       $this->assertNotEmpty($s, 'Статус ошибки есть');
       $this->assertEquals($m, $e->getHumanMessage(), 'Текст ошибки для человеков');
       $this->assertEquals($s, $e->getHTTPStatus(), 'HTTP Status для роботов');
+      $this->assertEquals($h, $e->getHTTPHeader(), 'Сформированный HTTP Header');
     }
   }
 }

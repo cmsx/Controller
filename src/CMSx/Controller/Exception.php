@@ -64,6 +64,15 @@ class Exception extends \Exception
     return static::GetHTTPInfo($this->getCode(), false);
   }
 
+  /** HTTP заголовок вида HTTP/1.0 404 Not Found */
+  public function getHTTPHeader()
+  {
+    $s = $this->getHTTPStatus();
+    return $s
+      ? sprintf('HTTP/1.0 %d %s', $this->getCode(), $s)
+      : false;
+  }
+
   /** Получение адреса для перенаправления */
   public function getRedirectUrl()
   {
