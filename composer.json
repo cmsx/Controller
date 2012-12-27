@@ -9,28 +9,6 @@
         "cmsx/page":"dev-master",
         "cmsx/url":"dev-master"
     },
-    "repositories":[
-        {
-            "type":"git",
-            "url":"http://github.com/cmsx/Page"
-        },
-        {
-            "type":"git",
-            "url":"http://github.com/cmsx/URL"
-        },
-        {
-            "type":"git",
-            "url":"http://github.com/cmsx/HTML"
-        },
-        {
-            "type":"git",
-            "url":"http://github.com/cmsx/Template"
-        },
-        {
-            "type":"git",
-            "url":"http://github.com/cmsx/Container"
-        }
-    ],
     "autoload":{
         "psr-0":{
             "CMSx":"src"
