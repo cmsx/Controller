@@ -79,7 +79,7 @@ class Router
   }
 
   /** Режим отладки при выводе информации об ошибках */
-  public function enableDebugMode($on = true)
+  public function enableDebug($on = true)
   {
     $this->debug_mode = $on;
 
@@ -160,9 +160,9 @@ class Router
     }
 
     if ($this->isDebugMode()) {
-      $p->set('message', $e->getMessage());
-      $p->set('stack', $e->getTraceAsString());
+      $p->setText(HTML::Tag('h3', $e->getMessage()) . "\n" . HTML::Tag('p', nl2br($e->getTraceAsString())));
     }
+    $p->set('exception', $e);
 
     return $p;
   }

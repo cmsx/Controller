@@ -30,15 +30,24 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
   public function testExceptions()
   {
+    $exp = Exception::GetHTTPInfo(Exception::NOT_FOUND, true);
+
     $r = new Router(new URL('hello'), $this->path);
     $p = $r->process(true);
-
-    $exp = Exception::GetHTTPInfo(Exception::NOT_FOUND, true);
+    $h = $p->render();
     $this->assertEquals($exp, $p->getTitle(), 'Ошибка: страница не найдена');
+    $this->assertSelectCount('html body h1', true, $h, 'Заголовок страницы с ошибкой');
+    $this->assertSelectCount('html body h3', false, $h, 'Debug=off Описания нет');
+    $this->assertSelectCount('html body p', false, $h, 'Debug=off Стека вызовов нет');
 
     $r = new Router; //Путь к контроллерам не прописан
+    $r->enableDebug(); //В режиме отладки выводится доп.информация при ошибках
     $p = $r->process(true);
+    $h = $p->render();
     $this->assertEquals($exp, $p->getTitle(), 'Отсутствие контроллера по-умолчанию');
+    $this->assertSelectCount('html body h1', true, $h, 'Заголовок страницы с ошибкой');
+    $this->assertSelectCount('html body h3', true, $h, 'Описание');
+    $this->assertSelectCount('html body p', true, $h, 'Стек вызовов');
   }
 
   protected function setUp()
