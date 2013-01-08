@@ -19,6 +19,6 @@ class defaultController extends \CMSx\Controller
 
   function not_existsAction()
   {
-    $this->notFound();
+    $this->NotFound();
   }
 }

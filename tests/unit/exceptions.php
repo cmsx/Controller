@@ -9,11 +9,10 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 {
   function testRedirect()
   {
-    $c = new Controller('test', 'test');
     $p = '/some/path.html';
 
     try {
-      $c->redirect($p);
+      Controller::Redirect($p);
       $this->fail('Редирект выбрасывает исключение #1');
     } catch (Exception $e) {
       $this->assertTrue($e->isRedirect(), 'Проверка, что это редирект #1');
@@ -22,7 +21,7 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
     }
 
     try {
-      $c->redirect($p, true);
+      Controller::Redirect($p, true);
       $this->fail('Редирект выбрасывает исключение #2');
     } catch (Exception $e) {
       $this->assertTrue($e->isRedirect(), 'Проверка, что это редирект #2');
@@ -33,9 +32,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testBack()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->back();
+      Controller::Back();
       $this->fail('Редирект выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertTrue($e->isRedirect(), 'Проверка, что это редирект');
@@ -46,9 +44,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testNotFound()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->notFound();
+      Controller::NotFound();
       $this->fail('Выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertFalse($e->isRedirect());
@@ -58,9 +55,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testForbidden()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->forbidden();
+      Controller::Forbidden();
       $this->fail('Выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertEquals(Exception::FORBIDDEN, $e->getCode(), 'Код ошибки');
@@ -69,9 +65,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testUnauthorized()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->unauthorized();
+      Controller::Unauthorized();
       $this->fail('Выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertEquals(Exception::UNAUTHORIZED, $e->getCode(), 'Код ошибки');
@@ -80,9 +75,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testUnavailable()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->unavailable();
+      Controller::Unavailable();
       $this->fail('Выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertEquals(Exception::UNAVAILABLE, $e->getCode(), 'Код ошибки');
@@ -91,9 +85,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testServerError()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->serverError();
+      Controller::ServerError();
       $this->fail('Выбрасывает исключение');
     } catch (Exception $e) {
       $this->assertEquals(Exception::SERVER_ERROR, $e->getCode(), 'Код ошибки');
@@ -102,9 +95,8 @@ class ExceptionsTest extends PHPUnit_Framework_TestCase
 
   function testMessage()
   {
-    $c = new Controller('test', 'test');
     try {
-      $c->redirect('/some/path.html');
+      Controller::Redirect('/some/path.html');
       $this->fail('Редирект выбрасывает исключение');
     } catch (\CMSx\Controller\Exception $e) {
       $m = Exception::GetHTTPInfo($e->getCode(), true);

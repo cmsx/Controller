@@ -129,7 +129,7 @@ class Router
     $ctrl = new $c($this->controller, $this->action, $this->url);
 
     if (!is_callable(array($ctrl, $a))) {
-      $ctrl->notFound(sprintf('Метод "%s" в контроллере "%s" не найден', $a, $c));
+      $ctrl->NotFound(sprintf('Метод "%s" в контроллере "%s" не найден', $a, $c));
     }
 
     return $ctrl->{$a}();

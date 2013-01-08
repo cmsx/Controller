@@ -33,7 +33,7 @@ class Controller
    *
    * @throws Exception
    */
-  public function redirect($url, $permanent = false)
+  public static function Redirect($url, $permanent = false)
   {
     Exception::Redirect($url, $permanent);
   }
@@ -42,16 +42,16 @@ class Controller
    * Редирект на предыдущую страницу по HTTP REFERER`у
    * Если реферер не указан, отправляет на главную
    */
-  public function back()
+  public static function Back()
   {
-    $this->redirect(!empty($_SERVER['HTTP_REFERER']) ? : '/', false);
+    static::Redirect(!empty($_SERVER['HTTP_REFERER']) ? : '/', false);
   }
 
   /**
    * Ошибка страница не найдена
    * @throws Exception
    */
-  public function notFound($msg = null)
+  public static function NotFound($msg = null)
   {
     throw new Exception($msg, Exception::NOT_FOUND);
   }
@@ -60,7 +60,7 @@ class Controller
    * Ошибка доступ без авторизации запрещен
    * @throws Exception
    */
-  public function unauthorized($msg = null)
+  public static function Unauthorized($msg = null)
   {
     throw new Exception($msg, Exception::UNAUTHORIZED);
   }
@@ -69,7 +69,7 @@ class Controller
    * Ошибка доступ запрещен
    * @throws Exception
    */
-  public function forbidden($msg = null)
+  public static function Forbidden($msg = null)
   {
     throw new Exception($msg, Exception::FORBIDDEN);
   }
@@ -78,7 +78,7 @@ class Controller
    * Ошибка Сервис недоступен
    * @throws Exception
    */
-  public function unavailable($msg = null)
+  public static function Unavailable($msg = null)
   {
     throw new Exception($msg, Exception::UNAVAILABLE);
   }
@@ -87,7 +87,7 @@ class Controller
    * Ошибка "ошибка сервера"
    * @throws Exception
    */
-  public function serverError($msg = null)
+  public static function ServerError($msg = null)
   {
     throw new Exception($msg, Exception::SERVER_ERROR);
   }
