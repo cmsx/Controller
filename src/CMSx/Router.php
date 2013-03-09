@@ -40,7 +40,7 @@ class Router
         return false;
       }
     } catch (\Exception $e) {
-      return $this->handleException($e);
+      $res = $this->handleException($e);
     }
 
     if ($return) {
