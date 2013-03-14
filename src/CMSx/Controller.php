@@ -27,6 +27,16 @@ class Controller
     $this->url        = $url;
   }
 
+  /**
+   * Получение клона объекта текущего URL
+   *
+   * @return URL
+   */
+  public function getUrl()
+  {
+    return clone $this->url;
+  }
+
   /** Проверка сделан ли запрос AJAXом */
   public function isAjax()
   {
