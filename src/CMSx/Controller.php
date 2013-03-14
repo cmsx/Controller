@@ -27,6 +27,12 @@ class Controller
     $this->url        = $url;
   }
 
+  /** Проверка сделан ли запрос AJAXом */
+  public function isAjax()
+  {
+    return isset ($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+  }
+
   /**
    * Редирект на заданный URL
    * $permanent - постоянный или временный редирект
