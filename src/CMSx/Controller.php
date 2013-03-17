@@ -60,7 +60,7 @@ class Controller
    */
   public static function Back()
   {
-    static::Redirect(!empty($_SERVER['HTTP_REFERER']) ? : '/', false);
+    static::Redirect(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/', false);
   }
 
   /**
